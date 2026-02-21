@@ -153,16 +153,16 @@ $(TMP_DIR):
 #		Testing																   #
 # **************************************************************************** #
 
-# nginx:
-# 					make -C $(NGINX_DOCK)
-# 					@echo "Connect on http://localhost:8080"
+nginx:
+					make -C $(NGINX_DOCK)
+					@echo "Connect on http://localhost:8080"
 
-# $(CCLIENT_NAME):
-# 					$(CC) $(FLAGS) -o $(CCLIENT_NAME) $(CCLIENT)
+$(CCLIENT_NAME):
+					$(CC) $(FLAGS) -o $(CCLIENT_NAME) $(CCLIENT)
 
-# test:				$(TMP_DIR)
-# 					$(CC) $(DEBUG_FLAG) -I$(UNIT_TEST_FRAME) $(INC) -o $(UNIT_TEST_BIN) $(UNIT_TEST_SRC) $(SRC_NO_MAIN)
-# 					./utest_webserv -ni -nv
+test:				$(TMP_DIR)
+					$(CC) $(DEBUG_FLAG) -I$(UNIT_TEST_FRAME) $(INC) -o $(UNIT_TEST_BIN) $(UNIT_TEST_SRC) $(SRC_NO_MAIN)
+					./utest_webserv -ni -nv
 
 # **************************************************************************** #
 #		Debug																   #
@@ -190,6 +190,8 @@ siege:
 
 clean:
 					rm -rf $(OBJ_DIR)
+					rm -rf $(UNIT_TEST_BIN)
+					make -C $(NGINX_DOCK) clean
 
 fclean:
 					make clean
@@ -197,4 +199,4 @@ fclean:
 
 re:					fclean all
 
-.PHONY:				all clean fclean re debug verbose
+.PHONY:				all clean fclean re debug verbose $(CCLIENT_NAME)
