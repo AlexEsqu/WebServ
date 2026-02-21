@@ -13,3 +13,4 @@ tmp/
 pages/upload/*
 *.pdf
 .vscode
+.vscode/*
